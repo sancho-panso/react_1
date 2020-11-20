@@ -1,7 +1,7 @@
 import Header from"../header/Header";
 import Nav from"../nav/Nav";
-import Main from"../main/Main";
-
+import Main from"../main/Main1";
+import "../Fontawesome";
 
 
 function App(params) {

@@ -13,7 +13,7 @@ class Main extends Component{
         super()
         this.state = {
             count:0,
-            moviesData:{}
+            moviesData:[]
         }
     }
 
@@ -33,23 +33,37 @@ class Main extends Component{
                     this.setState({
                         moviesData: data.Search
                     } )
-                    console.log(this.state.moviesData);
+                   // console.log(this.state.moviesData);
                 }
             )
     }
 
+  /*  let movies2 = this.state.moviesData.forEach(element => {
+        let path = "http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&s=" + element.Title
+        fetch(path)
+        .then(response => response.json())
+        .then(
+            data=>{
+                this.setState({
+                    moviesData: data.Search
+                } )
+               // console.log(this.state.moviesData);
+            }
+        )
+        
+    });*/
+
     render() {
-//{{console.log(this.state.moviesData);}}
-   const movies = this.state.moviesData.map(movie => 
+
+    const moviess = this.state.moviesData.map(movie=>
         <Movie key={movie.imdbID} 
                name={movie.Title}
-               note={movie.Year}
-        />)
+               note={movie.Year}/>)
     return(
         <Container>
         <div>   
             <div className = "row">
-             {movies}
+             {moviess}
             </div>
         </div>
         <div>

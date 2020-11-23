@@ -6,7 +6,7 @@ function Movie(props) {
             <div className = "card">
                 <div className = "card-body">
                     <h5 className = "card-title">Pavadinimas: {props.name}</h5> 
-                    <p className = "card-text">Aprašymas: {props.note}</p>
+                    <p className = "card-text">Metai: {props.note}</p>
                     <a href="#" className ="btn btn-primary">Plačiau</a>   
                 </div>
             </div>

@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 
 function Main1() { 
     return(
-        <Container className="p-3">
+        <Container fluid>
             <Row>
                 <Col>
                     <Card style={{ width: '18rem' }}>

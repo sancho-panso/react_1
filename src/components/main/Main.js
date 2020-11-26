@@ -1,15 +1,14 @@
 import'./main.scss'
 
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Container';
 import Movie from '../movie/Movie'
 import React, {Component} from 'react';
 
 
 class Main extends Component{
-    constructor()
+    constructor(props)
     {
-        super()
+        super(props)
         this.state = {
             count:0,
             moviesData:[]
@@ -25,39 +24,25 @@ class Main extends Component{
     }
 
 
-   /* async componentDidMount() {
-        await fetch("http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&s=terminator")
-            .then(response => response.json())
-            .then(async function(firstData){
-                let movies = firstData.Search;
-                    movies.forEach(async function(movie) {
-                        let path = "http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&t=" + movie.Title
-                        await fetch(path)
-                        .then(response2 => response2.json())
-                        .then(movieWithPlot=>{
-                        movie.Plot = movieWithPlot.Plot;
-                        })
-                        return movie;
-                    })
-                return movies;
-            }).then(data=>{this.setState({moviesData: data})})
-
-        } */
 async componentDidMount() {
-    let res = await fetch("http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&s=Shrek");
+    let path
+    (this.props.search)? path = this.props.search: path = "Shrek";
+    let res = await fetch("http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&s=" + path)
     let data = await res.json()
     let movies = data.Search;
-    for (let index = 0; index < movies.length; index++) {
-        let path = "http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&t=" + movies[index].Title;
-        let response = await fetch(path);
-        let movieWithPlot = await response.json();
-        movies[index].Plot = movieWithPlot.Plot;
+    if(movies){
+        for (let index = 0; index < movies.length; index++) {
+            let path = "http://www.omdbapi.com/?i=tt3896198&apikey=a5bf7638&t=" + movies[index].Title;
+            let response = await fetch(path);
+            let movieWithPlot = await response.json();
+            movies[index].Plot = movieWithPlot.Plot;
+        }
+        this.setState({moviesData: movies})
     }
-    this.setState({moviesData: movies})
-}  
+} 
+
         
    render() {
-       console.log(this.state.moviesData);
         const movies = this.state.moviesData.map((item, index)=>
             <Movie key={index} 
                    name={item.Title}
@@ -71,10 +56,6 @@ async componentDidMount() {
                  {movies}
                 </div>
             </div>
-            <div>
-                <div><h2 style= {{textAlign:+"center"}}>{this.state.count}</h2></div>
-                <Button className ="btn btn-primary" onClick ={this.handleClick}>Click Me</Button>
-            </div>
             </Container>
         )
        
@@ -83,5 +64,4 @@ async componentDidMount() {
 
 
 export default Main;
-
 

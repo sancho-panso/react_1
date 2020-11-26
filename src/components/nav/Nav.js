@@ -1,26 +1,22 @@
 import './nav.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import Button from 'react-bootstrap/Button';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import Container from 'react-bootstrap/Container';
+import React, { Component } from 'react';
+import  {NavLink} from 'react-router-dom';
 
-function Nav() { 
-    return(
-    <nav>
-        <Container>
-        <Navbar className="bg-light justify-content-between" md={{ span: 4, offset: 8 }}>
-            <Form inline>
-                <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-                <Button type="submit" variant="primary"><FontAwesomeIcon icon="search"/></Button>
-            </Form>
-        </Navbar>
-        </Container>
+class Nav extends Component{
 
-    </nav>
-    )
- }
+    render(){
+        return(
+            <Container>
+                <nav className="navBar">
+                    <ul>
+                        <li><NavLink exact to="/">Pradinis</NavLink></li>
+                        <li><NavLink to="/form">Forma</NavLink></li>
+                    </ul>
+                </nav>
+            </Container>
+        )
+    }
+}
 
  export default Nav;
